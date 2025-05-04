@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import logo from './assets/ai-lawncare-logo.png';
+
+
 
 const SAMPLE_QUESTIONS = [
   "Why is my bermudagrass turning yellow?",
@@ -41,16 +44,21 @@ function App() {
   return (
     <div className="container">
       <aside className="sidebar">
+        <div className="logo-section">
+          <img src={logo} alt="AI Lawncare Assistant" className="logo" />
+          <h1 className="brand-name">AI Lawncare Assistant</h1>
+        </div>
+
         <h2>Sample Turf Questions</h2>
         <ul>
           {SAMPLE_QUESTIONS.map((q, idx) => (
-            <li key={idx} onClick={() => handleSampleClick(q)}>
-              {q}
-            </li>
+            <li key={idx} onClick={() => handleSampleClick(q)}>{q}</li>
           ))}
         </ul>
+
         <div className="ad-placeholder">[Google Ad Here]</div>
       </aside>
+
 
       <main className="chatbox">
         <div className="messages">
