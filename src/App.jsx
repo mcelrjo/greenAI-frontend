@@ -12,6 +12,23 @@ const SAMPLE_QUESTIONS = [
   "How do I control crabgrass organically?",
 ];
 
+const allowedKeywords = [
+  "grass", "lawn", "mower", "turf", "zoysia", "bermudagrass", "fungicide", "crabgrass", "fertilizer"
+];
+
+const isLawncareQuestion = (text) => {
+  const lowercase = text.toLowerCase();
+  return allowedKeywords.some((word) => lowercase.includes(word));
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!isLawncareQuestion(userInput)) {
+    setResponse("This assistant only answers turfgrass and lawncare questions.");
+    return;
+  }
+
+
 function App() {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
