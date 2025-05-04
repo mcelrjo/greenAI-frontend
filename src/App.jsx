@@ -84,7 +84,7 @@ function App() {
               <strong>{m.role === "user" ? "You" : "TurfAI"}:</strong> {m.content}
             </div>
           ))}
-          {loading && <div className="message assistant">Lawncare AI is thinking...</div>}
+          {loading && <div className="message assistant typing">TurfAI is typing</div>}
         </div>
         <form onSubmit={handleSubmit} className="input-form">
           <input
