@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>TurfAI Diagnostic Assistant</h1>
+      <h1>Lawncare AI Assistant</h1>
       <form onSubmit={handleSubmit}>
         <textarea
           value={userInput}
