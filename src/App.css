@@ -1,20 +1,33 @@
+/* Base Layout */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #2B1B0F;
+  color: #F3EAD2;
+}
+
 .container {
   display: flex;
   height: 100vh;
-  font-family: sans-serif;
 }
 
+/* Sidebar Styling */
 .sidebar {
   width: 250px;
   padding: 1rem;
-  background: #f0f0f0;
-  border-right: 1px solid #ccc;
+  background: #3E7E3C;
+  border-right: 2px solid #D4A741;
   overflow-y: auto;
 }
 
 .sidebar h2 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
+  color: #F3EAD2;
 }
 
 .sidebar ul {
@@ -25,29 +38,38 @@
 .sidebar li {
   margin: 0.5rem 0;
   cursor: pointer;
-  color: #0077cc;
+  color: #D4A741;
 }
 
+.sidebar li:hover {
+  text-decoration: underline;
+}
+
+/* Ad Placeholder */
 .ad-placeholder {
   margin-top: 2rem;
   padding: 1rem;
-  background: #ddd;
+  background: #2B1B0F;
   text-align: center;
   font-size: 0.9rem;
-  color: #444;
+  color: #F3EAD2;
+  border: 1px solid #D4A741;
 }
 
-.chatbox {
+/* Chat Area */
+.chatbox,
+.chat-area {
   flex: 1;
   display: flex;
   flex-direction: column;
+  background: #F3EAD2;
+  color: #2B1B0F;
 }
 
 .messages {
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
-  background: #fff;
 }
 
 .message {
@@ -58,24 +80,38 @@
   text-align: right;
 }
 
+/* Input Form */
 .input-form {
   display: flex;
   padding: 1rem;
-  border-top: 1px solid #ccc;
-  background: #f9f9f9;
+  border-top: 2px solid #3E7E3C;
+  background: #2B1B0F;
 }
 
 .input-form input {
   flex: 1;
   padding: 0.5rem;
   font-size: 1rem;
+  background-color: #F3EAD2;
+  border: 1px solid #3E7E3C;
+  color: #2B1B0F;
 }
 
 .input-form button {
   margin-left: 0.5rem;
   padding: 0.5rem 1rem;
+  background-color: #3E7E3C;
+  color: #F3EAD2;
+  border: none;
+  cursor: pointer;
 }
 
+.input-form button:hover {
+  background-color: #D4A741;
+  color: #2B1B0F;
+}
+
+/* Logo */
 .logo-section {
   text-align: center;
   margin-bottom: 1rem;
@@ -91,14 +127,15 @@
 .brand-name {
   font-size: 1rem;
   font-weight: bold;
-  color: #333;
+  color: #D4A741;
 }
 
+/* Typing animation */
 .typing {
   display: inline-block;
   width: auto;
   font-style: italic;
-  color: #888;
+  color: #D4A741;
 }
 
 .typing::after {
@@ -112,18 +149,19 @@
   66% { content: ' ...'; }
   100% { content: ' .'; }
 }
-/* Layout */
+
+/* Banner */
 .header-banner {
   display: flex;
   align-items: center;
-  background-color: #228B22;
-  color: white;
+  background-color: #2B1B0F;
+  color: #D4A741;
   padding: 0.5rem 1rem;
-  height: 72px; /* slightly taller */
+  height: 72px;
 }
 
 .header-banner .logo {
-  height: 48px; /* increase logo size */
+  height: 48px;
   margin-right: 1rem;
 }
 
@@ -133,67 +171,20 @@
   white-space: nowrap;
 }
 
+/* 3 Column Layout */
 .three-column-layout {
   display: flex;
-  height: calc(100vh - 48px); /* matches the new banner height */
-  width: 100vw; /* force full viewport width */
+  height: calc(100vh - 72px);
+  width: 100vw;
   max-width: 100%;
 }
 
-.sidebar,
-.chat-area {
-  min-height: 0;
-}
-
-body, html, #root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-
 .sidebar.right {
   border-right: none;
-  border-left: 1px solid #ccc;
+  border-left: 2px solid #D4A741;
 }
 
-.chat-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-}
-
-.messages {
-  flex: 1;
-  padding: 1rem;
-  overflow-y: auto;
-}
-
-.message {
-  margin-bottom: 1rem;
-}
-
-.input-form {
-  display: flex;
-  border-top: 1px solid #ccc;
-  padding: 1rem;
-}
-
-.input-form input {
-  flex: 1;
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
-.input-form button {
-  margin-left: 0.5rem;
-  padding: 0.5rem 1rem;
-}
-
-/* Mobile Responsiveness */
+/* Responsive Design */
 @media (max-width: 900px) {
   .three-column-layout {
     flex-direction: column;
@@ -202,14 +193,22 @@ body, html, #root {
   .sidebar {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #D4A741;
   }
 
-  .sidebar.right {
-    order: 3;
-    border-left: none;
-    border-top: 1px solid #ccc;
-  }
+.sidebar.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.9rem; /* Slightly smaller font */
+  height: 100%;
+  overflow-y: auto;
+}
+
+.news-feed {
+  flex-grow: 1;
+  overflow-y: auto;
+}
 
   .chat-area {
     height: 60vh;

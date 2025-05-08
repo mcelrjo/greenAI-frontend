@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import logo from "./assets/ai-lawncare-logo.png";
+import logo from "./assets/AIGreenLogo.png";
 
 const SAMPLE_QUESTIONS = [
   "Why is my bermudagrass turning yellow?",
@@ -97,25 +97,16 @@ function App() {
 
         <aside className="sidebar right">
           <h2>Lawn Care News</h2>
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              paddingTop: "177.78%" // Aspect ratio: 1600/900 * 100
-            }}
-          >
+          <div className="news-feed">
             <iframe
               src="https://rss.app/embed/v1/feed/Y2w4zPxrObmELkuA"
               frameBorder="0"
+              title="Lawn Care News"
               style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
                 width: "100%",
                 height: "100%",
-                border: 0
+                border: "none"
               }}
-              title="Lawn Care News"
             />
           </div>
         </aside>
