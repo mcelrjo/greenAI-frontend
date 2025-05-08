@@ -97,7 +97,13 @@ function App() {
 
         <aside className="sidebar right">
           <h2>Lawn Care News</h2>
-          <div style="position: relative; width: 100%; padding-top: 177.78%; /* Aspect ratio: 1600/900 * 100 */">
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              paddingTop: "177.78%" // Aspect ratio: 1600/900 * 100
+            }}
+          >
             <iframe
               src="https://rss.app/embed/v1/feed/Y2w4zPxrObmELkuA"
               frameBorder="0"
@@ -113,6 +119,7 @@ function App() {
             />
           </div>
         </aside>
+
       </div>
     </div>
   );
