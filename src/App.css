@@ -118,26 +118,40 @@
   align-items: center;
   background-color: #228B22;
   color: white;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
+  height: 48px
 }
 
 .header-banner .logo {
-  height: 40px;
-  margin-right: 1rem;
+  height: 32px;
+  margin-right: 0.75rem;
+}
+
+.header-banner h1 {
+  font-size: 1.25rem; /* smaller text */
+  margin: 0;
 }
 
 .three-column-layout {
   display: flex;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 48px); /* matches the new banner height */
+  width: 100vw; /* force full viewport width */
+  max-width: 100%;
 }
 
-.sidebar {
-  width: 250px;
-  padding: 1rem;
-  background: #f0f0f0;
-  overflow-y: auto;
-  border-right: 1px solid #ccc;
+.sidebar,
+.chat-area {
+  min-height: 0;
 }
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 
 .sidebar.right {
   border-right: none;

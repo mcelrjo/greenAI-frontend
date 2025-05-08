@@ -98,7 +98,7 @@ function App() {
         <aside className="sidebar right">
           <h2>Lawn Care News</h2>
           <iframe
-            src="https://rss.app/rss-feed?keyword=news.google.com%2C%20%22lawn%20care%22&region=US&lang=en" // ← Replace with your own RSS widget link
+            src="https://rss.app/feeds/Y2w4zPxrObmELkuA.xml" // ← Replace with your own RSS widget link
             width="100%"
             height="500"
             frameBorder="0"
