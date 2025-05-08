@@ -97,14 +97,13 @@ function App() {
 
         <aside className="sidebar right">
           <h2>Lawn Care News</h2>
-          <iframe
-            src="https://rss.app/feeds/Y2w4zPxrObmELkuA.xml" // ← Replace with your own RSS widget link
-            width="100%"
-            height="500"
-            frameBorder="0"
-            scrolling="yes"
-            title="Lawn News"
-          ></iframe>
+          <div style="position: relative; width: 100%; padding-top: 177.78%; /* Aspect ratio: 1600/900 * 100 */">
+            <iframe
+                src="https://rss.app/embed/v1/feed/Y2w4zPxrObmELkuA"
+                frameBorder="0"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
+            </iframe>
+          </div>
         </aside>
       </div>
     </div>
