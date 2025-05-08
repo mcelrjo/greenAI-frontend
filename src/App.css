@@ -179,10 +179,6 @@ body, html, #root {
   max-width: 100%;
 }
 
-.sidebar.right {
-  border-right: none;
-  border-left: 2px solid #D4A741;
-}
 
 /* Responsive Design */
 @media (max-width: 900px) {
@@ -205,9 +201,13 @@ body, html, #root {
   overflow-y: auto;
 }
 
+.sidebar.right h2 {
+  margin-bottom: 0.5rem;
+}
+
 .news-feed {
   flex-grow: 1;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
   .chat-area {
