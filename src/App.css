@@ -1,33 +1,62 @@
-/* Base Layout */
+/* Base Layout and Theme */
 body, html, #root {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
   font-family: 'Segoe UI', sans-serif;
   background-color: #2B1B0F;
   color: #F3EAD2;
+  overflow: hidden;
 }
 
-.container {
+/* Header Banner */
+.header-banner {
   display: flex;
-  height: 100vh;
+  align-items: center;
+  background-color: #2B1B0F;
+  color: #D4A741;
+  padding: 0.5rem 1rem;
+  height: 72px;
 }
 
-/* Sidebar Styling */
+.header-banner .logo {
+  height: 48px;
+  margin-right: 1rem;
+}
+
+.header-banner h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Layout Container */
+.three-column-layout {
+  display: flex;
+  height: calc(100vh - 72px); /* Full height minus banner */
+  width: 100vw;
+}
+
+/* Shared Sidebar Styling */
 .sidebar {
   width: 250px;
   padding: 1rem;
   background: #3E7E3C;
-  border-right: 2px solid #D4A741;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar h2 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
   color: #F3EAD2;
+}
+
+/* Left Sidebar (Sample Questions) */
+.sidebar.left {
+  border-right: 2px solid #D4A741;
 }
 
 .sidebar ul {
@@ -45,25 +74,34 @@ body, html, #root {
   text-decoration: underline;
 }
 
-/* Ad Placeholder */
-.ad-placeholder {
-  margin-top: 2rem;
-  padding: 1rem;
-  background: #2B1B0F;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #F3EAD2;
-  border: 1px solid #D4A741;
+/* Right Sidebar (News Feed) */
+.sidebar.right {
+  border-left: 2px solid #D4A741;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.news-feed {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.news-feed iframe {
+  flex: 1;
+  border: none;
 }
 
 /* Chat Area */
-.chatbox,
 .chat-area {
   flex: 1;
   display: flex;
   flex-direction: column;
   background: #F3EAD2;
   color: #2B1B0F;
+  height: 100%;
 }
 
 .messages {
@@ -78,6 +116,25 @@ body, html, #root {
 
 .message.user {
   text-align: right;
+}
+
+/* Typing Animation */
+.typing {
+  display: inline-block;
+  font-style: italic;
+  color: #D4A741;
+}
+
+.typing::after {
+  content: ' .';
+  animation: dots 1s steps(5, end) infinite;
+}
+
+@keyframes dots {
+  0% { content: ' .'; }
+  33% { content: ' ..'; }
+  66% { content: ' ...'; }
+  100% { content: ' .'; }
 }
 
 /* Input Form */
@@ -111,106 +168,30 @@ body, html, #root {
   color: #2B1B0F;
 }
 
-/* Logo */
-.logo-section {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.logo {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 0.25rem;
-}
-
-.brand-name {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #D4A741;
-}
-
-/* Typing animation */
-.typing {
-  display: inline-block;
-  width: auto;
-  font-style: italic;
-  color: #D4A741;
-}
-
-.typing::after {
-  content: ' .';
-  animation: dots 1s steps(5, end) infinite;
-}
-
-@keyframes dots {
-  0% { content: ' .'; }
-  33% { content: ' ..'; }
-  66% { content: ' ...'; }
-  100% { content: ' .'; }
-}
-
-/* Banner */
-.header-banner {
-  display: flex;
-  align-items: center;
-  background-color: #2B1B0F;
-  color: #D4A741;
-  padding: 0.5rem 1rem;
-  height: 72px;
-}
-
-.header-banner .logo {
-  height: 48px;
-  margin-right: 1rem;
-}
-
-.header-banner h1 {
-  font-size: 1.5rem;
-  margin: 0;
-  white-space: nowrap;
-}
-
-/* 3 Column Layout */
-.three-column-layout {
-  display: flex;
-  height: calc(100vh - 72px);
-  width: 100vw;
-  max-width: 100%;
-}
-
-
-/* Responsive Design */
+/* Responsive Layout for Mobile */
 @media (max-width: 900px) {
   .three-column-layout {
     flex-direction: column;
+    height: auto;
   }
 
   .sidebar {
     width: 100%;
+    height: auto;
     border-right: none;
     border-bottom: 1px solid #D4A741;
   }
 
-.sidebar.right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-size: 0.9rem; /* Slightly smaller font */
-  height: 100%;
-  overflow-y: auto;
-}
-
-.sidebar.right h2 {
-  margin-bottom: 0.5rem;
-}
-
-.news-feed {
-  flex-grow: 1;
-  overflow: hidden;
-}
+  .sidebar.right {
+    border-left: none;
+    border-top: 1px solid #D4A741;
+  }
 
   .chat-area {
-    height: 60vh;
+    height: auto;
+  }
+
+  .news-feed {
+    height: 400px;
   }
 }
