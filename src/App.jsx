@@ -1,57 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import logo from './assets/ai-lawncare-logo.png';
-
-
+import logo from "./assets/ai-lawncare-logo.png";
 
 const SAMPLE_QUESTIONS = [
   "Why is my bermudagrass turning yellow?",
-  "What causes dollar spot in bentgrass?",
-  "How often should I mow Zoysia turf?",
   "How do I control crabgrass organically?",
+  "What is this brown spot in my lawn?",
+  "When should I fertilize Zoysia?"
 ];
-
-const allowedKeywords = [
-  "grass", "lawn", "mower", "turf", "zoysia", "bermudagrass", "fungicide", "crabgrass", "fertilizer"
-];
-
-const isLawncareQuestion = (text) => {
-  const lowercase = text.toLowerCase();
-  return allowedKeywords.some((word) => lowercase.includes(word));
-};
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!isLawncareQuestion(userInput)) {
-    setResponse("This assistant only answers turfgrass and lawncare questions.");
-    return;
-  }
-
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [animatedResponse, setAnimatedResponse] = useState("");
 
-  const handleSampleClick = (question) => {
-    setUserInput(question);
+  const handleSampleClick = (q) => {
+    setUserInput(q);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!userInput.trim()) return;
 
-    setMessages((prev) => [...prev, { role: "user", content: userInput }]);
+    setMessages([...messages, { role: "user", content: userInput }]);
     setLoading(true);
 
     try {
       const res = await axios.post("https://greenai-k36d.onrender.com/diagnose", {
         user_input: userInput,
       });
-      setMessages((prev) => [...prev, { role: "assistant", content: res.data.response }]);
-    } catch (error) {
-      setMessages((prev) => [...prev, { role: "assistant", content: "Error fetching diagnosis." }]);
+
+      let full = res.data.response;
+      let index = 0;
+      setAnimatedResponse("");
+
+      const animate = () => {
+        if (index < full.length) {
+          setAnimatedResponse((prev) => prev + full.charAt(index));
+          index++;
+          setTimeout(animate, 20);
+        } else {
+          setMessages((prev) => [...prev, { role: "assistant", content: full }]);
+          setAnimatedResponse("");
+        }
+      };
+      animate();
+    } catch {
+      setMessages([...messages, { role: "assistant", content: "Error fetching diagnosis." }]);
     }
 
     setUserInput("");
@@ -59,46 +56,59 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <aside className="sidebar">
-        <div className="logo-section">
-          <img src={logo} alt="AI Lawncare Assistant" className="logo" />
-          <h1 className="brand-name">AI Lawncare Assistant</h1>
-        </div>
+    <div>
+      <header className="header-banner">
+        <img src={logo} alt="Lawncare AI" className="logo" />
+        <h1>AI Lawncare Assistant</h1>
+      </header>
 
-        <h2>Sample Turf Questions</h2>
-        <ul>
-          {SAMPLE_QUESTIONS.map((q, idx) => (
-            <li key={idx} onClick={() => handleSampleClick(q)}>{q}</li>
-          ))}
-        </ul>
+      <div className="three-column-layout">
+        <aside className="sidebar left">
+          <h2>Sample Questions</h2>
+          <ul>
+            {SAMPLE_QUESTIONS.map((q, i) => (
+              <li key={i} onClick={() => handleSampleClick(q)}>{q}</li>
+            ))}
+          </ul>
+        </aside>
 
-        <div className="ad-placeholder">[Google Ad Here]</div>
-      </aside>
+        <main className="chat-area">
+          <div className="messages">
+            {messages.map((m, idx) => (
+              <div key={idx} className={`message ${m.role}`}>
+                <strong>{m.role === "user" ? "You" : "TurfAI"}:</strong> {m.content}
+              </div>
+            ))}
+            {animatedResponse && (
+              <div className="message assistant"><strong>TurfAI:</strong> {animatedResponse}</div>
+            )}
+            {loading && <div className="message assistant typing">TurfAI is typing...</div>}
+          </div>
+          <form onSubmit={handleSubmit} className="input-form">
+            <input
+              type="text"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              placeholder="Describe your turf issue..."
+            />
+            <button type="submit">Send</button>
+          </form>
+        </main>
 
-
-      <main className="chatbox">
-        <div className="messages">
-          {messages.map((m, idx) => (
-            <div key={idx} className={`message ${m.role}`}>
-              <strong>{m.role === "user" ? "You" : "TurfAI"}:</strong> {m.content}
-            </div>
-          ))}
-          {loading && <div className="message assistant typing">TurfAI is typing</div>}
-        </div>
-        <form onSubmit={handleSubmit} className="input-form">
-          <input
-            type="text"
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            placeholder="Describe your turf issue..."
-          />
-          <button type="submit" disabled={loading}>Send</button>
-        </form>
-      </main>
+        <aside className="sidebar right">
+          <h2>Lawn Care News</h2>
+          <iframe
+            src="https://rss.app/rss-feed?keyword=news.google.com%2C%20%22lawn%20care%22&region=US&lang=en" // ← Replace with your own RSS widget link
+            width="100%"
+            height="500"
+            frameBorder="0"
+            scrolling="yes"
+            title="Lawn News"
+          ></iframe>
+        </aside>
+      </div>
     </div>
   );
 }
 
 export default App;
-
