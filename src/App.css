@@ -117,6 +117,19 @@ body, html, #root {
 .message.user {
   text-align: right;
 }
+.chat-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.center-logo {
+  max-width: 300px;
+  width: 60%;
+  height: auto;
+  opacity: 0.8;
+}
 
 /* Typing Animation */
 .typing {

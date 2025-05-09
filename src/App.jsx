@@ -74,16 +74,29 @@ function App() {
 
         <main className="chat-area">
           <div className="messages">
-            {messages.map((m, idx) => (
-              <div key={idx} className={`message ${m.role}`}>
-                <strong>{m.role === "user" ? "You" : "TurfAI"}:</strong> {m.content}
+            {messages.length === 0 && animatedResponse === "" && !loading ? (
+              <div className="chat-logo-container">
+                <img src={logo} alt="Lawncare AI Logo" className="center-logo" />
               </div>
-            ))}
-            {animatedResponse && (
-              <div className="message assistant"><strong>TurfAI:</strong> {animatedResponse}</div>
+            ) : (
+              <>
+                {messages.map((m, idx) => (
+                  <div key={idx} className={`message ${m.role}`}>
+                    <strong>{m.role === "user" ? "You" : "TurfAI"}:</strong> {m.content}
+                  </div>
+                ))}
+                {animatedResponse && (
+                  <div className="message assistant">
+                    <strong>TurfAI:</strong> {animatedResponse}
+                  </div>
+                )}
+                {loading && (
+                  <div className="message assistant typing">TurfAI is typing...</div>
+                )}
+              </>
             )}
-            {loading && <div className="message assistant typing">TurfAI is typing...</div>}
           </div>
+
           <form onSubmit={handleSubmit} className="input-form">
             <input
               type="text"
