@@ -112,7 +112,7 @@ function App() {
           <h2>Lawn Care News</h2>
           <div className="news-feed">
             <iframe
-              src="https://rss.app/embed/v1/feed/Y2w4zPxrObmELkuA"
+              src="https://rss.app/embed/v1/list/Y2w4zPxrObmELkuA"
               frameBorder="0"
               title="Lawn Care News"
               style={{
