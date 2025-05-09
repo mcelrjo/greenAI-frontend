@@ -59,7 +59,7 @@ function App() {
     <div>
       <header className="header-banner">
         <img src={logo} alt="Lawncare AI" className="logo" />
-        <h1>AI Lawncare Assistant</h1>
+        <h1>AI Green Assistant</h1>
       </header>
 
       <div className="three-column-layout">

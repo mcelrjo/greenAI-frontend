@@ -17,16 +17,17 @@ body, html, #root {
   background-color: #2B1B0F;
   color: #D4A741;
   padding: 0.5rem 1rem;
-  height: 72px;
+  height: 100px;
 }
 
 .header-banner .logo {
-  height: 48px;
+  height: 80px;
+  width: auto;
   margin-right: 1rem;
 }
 
 .header-banner h1 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin: 0;
   white-space: nowrap;
 }
