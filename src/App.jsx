@@ -82,12 +82,12 @@ function App() {
               <>
                 {messages.map((m, idx) => (
                   <div key={idx} className={`message ${m.role}`}>
-                    <strong>{m.role === "user" ? "You" : "TurfAI"}:</strong> {m.content}
+                    <strong>{m.role === "user" ? "🧑‍💻 You" : "🤖 TurfAI"}:</strong> {m.content}
                   </div>
                 ))}
                 {animatedResponse && (
                   <div className="message assistant">
-                    <strong>TurfAI:</strong> {animatedResponse}
+                    <strong>🤖 TurfAI:</strong> {animatedResponse}
                   </div>
                 )}
                 {loading && (
@@ -96,6 +96,17 @@ function App() {
               </>
             )}
           </div>
+
+          {/* Scroll to Latest Button */}
+          <button
+            className="scroll-to-latest"
+            onClick={() => {
+              const chatContainer = document.querySelector(".messages");
+              chatContainer.scrollTop = chatContainer.scrollHeight;
+            }}
+          >
+            ⬇️ Newest
+          </button>
 
           <form onSubmit={handleSubmit} className="input-form">
             <input
