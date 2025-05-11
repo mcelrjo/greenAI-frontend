@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import axios from "axios";
-import logo from "./src/assets/AIGreenLogo.png";  // Adjust if needed
+import logo from "./assets/AIGreenLogo.png";  // Adjust if needed
 
 const SAMPLE_QUESTIONS = ["What is crabgrass?", "How often should I mow?", "What fertilizer do I need?"];
 
