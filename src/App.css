@@ -96,9 +96,24 @@ body, html, #root {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative; /* Add this */
   background: #FFFFFF;
   color: #333333;
   height: 100%;
+}
+
+.chat-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.center-logo {
+  width: 50%;
+  max-width: 300px;
+  height: auto;
 }
 
 .messages {
@@ -191,16 +206,6 @@ body, html, #root {
     border-left: none;
     border-top: 1px solid #BDBDBD;
   }
-
-.chat-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative; /* Add this */
-  background: #FFFFFF;
-  color: #333333;
-  height: 100%;
-}
 
 
   .news-feed {

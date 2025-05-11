@@ -59,9 +59,15 @@ function App() {
   return (
     <div>
       <header className="header-banner">
-        <img src={logo} alt="Lawncare AI" className="logo" />
-        <h1>AI Green Assistant</h1>
+        <img src={logo} alt="LawnCare Assistant Logo" className="logo" />
+        <div>
+          <h1>LawnCare Assistant</h1>
+          <p style={{ fontStyle: "italic", fontSize: "0.9rem", margin: 0 }}>
+            powered by Landscape World Network
+          </p>
+        </div>
       </header>
+
 
       <div className="three-column-layout">
         <aside className="sidebar left">
@@ -77,9 +83,9 @@ function App() {
           <div className="messages">
             {messages.length === 0 && animatedResponse === "" && !loading ? (
               <div className="chat-logo-container">
-                <img src={logo} alt="Lawncare AI Logo" className="center-logo" />
+                <img src={logo} alt="Lawncare Assistant Logo" className="center-logo" />
               </div>
-            ) : (
+            ) : ( ... )}
               <>
                 {messages.map((m, idx) => (
                   <div key={idx} className={`message-wrapper ${m.role}`}>
