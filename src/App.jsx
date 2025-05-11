@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import logo from "./assets/AIGreenLogo.png";
+import ReactMarkdown from 'react-markdown';
 
 const SAMPLE_QUESTIONS = [
   "Why is my bermudagrass turning yellow?",
@@ -81,13 +82,17 @@ function App() {
             ) : (
               <>
                 {messages.map((m, idx) => (
-                  <div key={idx} className={`message ${m.role}`}>
-                    <strong>{m.role === "user" ? "🧑‍💻 You" : "🤖 TurfAI"}:</strong> {m.content}
+                  <div key={idx} className={`message-wrapper ${m.role}`}>
+                    <div className={`message ${m.role}`}>
+                      <strong>{m.role === "user" ? "You" : "TurfAI"}:</strong>
+                      <ReactMarkdown>{m.content}</ReactMarkdown>
+                    </div>
                   </div>
                 ))}
+
                 {animatedResponse && (
                   <div className="message assistant">
-                    <strong>🤖 TurfAI:</strong> {animatedResponse}
+                    <strong>🤖 TurfAI:</strong> <ReactMarkdown>{animatedResponse}</ReactMarkdown>
                   </div>
                 )}
                 {loading && (

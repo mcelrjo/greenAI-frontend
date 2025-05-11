@@ -115,6 +115,11 @@ body, html, #root {
   text-align: right;
 }
 
+.message-wrapper {
+  margin-bottom: 1rem;  /* Adds space between each message */
+}
+
+
 /* Input Form */
 .input-form {
   display: flex;
