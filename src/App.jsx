@@ -13,6 +13,19 @@ function App() {
             powered by Landscape World Network
           </p>
         </div>
+        <a
+          href="/news"
+          style={{
+            color: "white",
+            textDecoration: "none",
+            marginRight: "1rem",
+            backgroundColor: "#3E7E3C",
+            padding: "0.3rem 0.7rem",
+            borderRadius: "5px"
+          }}
+        >
+          LawnCare News
+        </a>
       </header>
 
       {/* Directly render ChatPage without Router or Routes */}
