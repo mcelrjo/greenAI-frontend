@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <header className="header-banner">
-        <img src="./path-to-your-logo.png" alt="LawnCare Assistant Logo" className="logo" />
+        <img src="./src/assets/AIGreenLogo.png" alt="LawnCare Assistant Logo" className="logo" />
         <div style={{ flexGrow: 1 }}>
           <h1>LawnCare Assistant</h1>
           <p style={{ fontStyle: "italic", fontSize: "0.9rem", margin: 0 }}>
