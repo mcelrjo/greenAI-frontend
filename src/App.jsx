@@ -85,7 +85,7 @@ function App() {
               <div className="chat-logo-container">
                 <img src={logo} alt="Lawncare Assistant Logo" className="center-logo" />
               </div>
-            ) : ( ... )}
+            ) : (
               <>
                 {messages.map((m, idx) => (
                   <div key={idx} className={`message-wrapper ${m.role}`}>
