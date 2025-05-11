@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import axios from "axios";
 import logo from "./assets/AIGreenLogo.png";  // Adjust if needed
 
-const SAMPLE_QUESTIONS = ["What is crabgrass?", "How often should I mow?", "What fertilizer do I need?"];
+const SAMPLE_QUESTIONS = ["How do I control crabgrass in my St. Augustinegrass lawn?", "How tall should I mow tall fescue?", "What fertilizer do I need to use in the fall?", "Which lawn is best- bermudagrass or zoysiagrass?"];
 
 function ChatPage() {
   const [messages, setMessages] = useState([]);
@@ -48,7 +48,7 @@ function ChatPage() {
   return (
     <div className="three-column-layout">
       <aside className="sidebar left">
-        <h2>Sample Questions</h2>
+        <h2>What questions do you have today?</h2>
         <ul>{SAMPLE_QUESTIONS.map((q, i) => <li key={i} onClick={() => handleSampleClick(q)}>{q}</li>)}</ul>
       </aside>
 
