@@ -1,153 +1,30 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import "./App.css";
-import logo from "./assets/AIGreenLogo.png";
-import ReactMarkdown from 'react-markdown';
-
-const SAMPLE_QUESTIONS = [
-  "Why is my bermudagrass turning yellow?",
-  "How do I control crabgrass organically?",
-  "What is this brown spot in my lawn?",
-  "When should I fertilize Zoysia?"
-];
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ChatPage from "./ChatPage";
+import LawnCareNews from "./LawnCareNews";  // You need to create this if not already
 
 function App() {
-  const [messages, setMessages] = useState([]);
-  const [userInput, setUserInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [animatedResponse, setAnimatedResponse] = useState("");
-
-  const handleSampleClick = (q) => {
-    setUserInput(q);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!userInput.trim()) return;
-
-    setMessages([...messages, { role: "user", content: userInput }]);
-    setLoading(true);
-
-    try {
-      const res = await axios.post("https://greenai-k36d.onrender.com/diagnose", {
-        user_input: userInput,
-      });
-
-      let full = res.data.response;
-      let index = 0;
-      setAnimatedResponse("");
-
-      const animate = () => {
-        if (index < full.length) {
-          setAnimatedResponse((prev) => prev + full.charAt(index));
-          index++;
-          setTimeout(animate, 20);
-        } else {
-          setMessages((prev) => [...prev, { role: "assistant", content: full }]);
-          setAnimatedResponse("");
-        }
-      };
-      animate();
-    } catch {
-      setMessages([...messages, { role: "assistant", content: "Error fetching diagnosis." }]);
-    }
-
-    setUserInput("");
-    setLoading(false);
-  };
-
   return (
-    <div>
+    <Router>
       <header className="header-banner">
-        <img src={logo} alt="LawnCare Assistant Logo" className="logo" />
-        <div>
+        <img src="./path-to-your-logo.png" alt="LawnCare Assistant Logo" className="logo" />
+        <div style={{ flexGrow: 1 }}>
           <h1>LawnCare Assistant</h1>
           <p style={{ fontStyle: "italic", fontSize: "0.9rem", margin: 0 }}>
             powered by Landscape World Network
           </p>
         </div>
+        <nav>
+          <Link to="/news" style={{ color: "white", textDecoration: "none", marginRight: "1rem" }}>
+            LawnCare News
+          </Link>
+        </nav>
       </header>
 
-
-      <div className="three-column-layout">
-        <aside className="sidebar left">
-          <h2>Sample Questions</h2>
-          <ul>
-            {SAMPLE_QUESTIONS.map((q, i) => (
-              <li key={i} onClick={() => handleSampleClick(q)}>{q}</li>
-            ))}
-          </ul>
-        </aside>
-
-        <main className="chat-area">
-          <div className="messages">
-            {messages.length === 0 && animatedResponse === "" && !loading ? (
-              <div className="chat-logo-container">
-                <img src={logo} alt="Lawncare Assistant Logo" className="center-logo" />
-              </div>
-            ) : (
-              <>
-                {messages.map((m, idx) => (
-                  <div key={idx} className={`message-wrapper ${m.role}`}>
-                    <div className={`message ${m.role}`}>
-                      <strong>{m.role === "user" ? "You" : "TurfAI"}:</strong>
-                      <ReactMarkdown>{m.content}</ReactMarkdown>
-                    </div>
-                  </div>
-                ))}
-
-                {animatedResponse && (
-                  <div className="message assistant">
-                    <strong>🤖 TurfAI:</strong> <ReactMarkdown>{animatedResponse}</ReactMarkdown>
-                  </div>
-                )}
-                {loading && (
-                  <div className="message assistant typing">TurfAI is typing...</div>
-                )}
-              </>
-            )}
-          </div>
-
-          {/* Scroll to Latest Button */}
-          <button
-            className="scroll-to-latest"
-            onClick={() => {
-              const chatContainer = document.querySelector(".messages");
-              chatContainer.scrollTop = chatContainer.scrollHeight;
-            }}
-          >
-            ⬇️ Newest
-          </button>
-
-          <form onSubmit={handleSubmit} className="input-form">
-            <input
-              type="text"
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Describe your turf issue..."
-            />
-            <button type="submit">Send</button>
-          </form>
-        </main>
-
-        <aside className="sidebar right">
-          <h2>Lawn Care News</h2>
-          <div className="news-feed">
-            <iframe
-              src="https://rss.app/embed/v1/list/Y2w4zPxrObmELkuA"
-              frameBorder="0"
-              title="Lawn Care News"
-              style={{
-                width: "100%",
-                height: "100%",
-                border: "none"
-              }}
-            />
-          </div>
-        </aside>
-
-      </div>
-    </div>
+      <Routes>
+        <Route path="/" element={<ChatPage />} />
+        <Route path="/news" element={<LawnCareNews />} />
+      </Routes>
+    </Router>
   );
 }
 
