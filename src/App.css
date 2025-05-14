@@ -140,11 +140,14 @@ body, html, #root {
 /* Input Form */
 .input-form {
   display: flex;
-  padding: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem;
   margin-bottom: 1rem; /* Lifts bar slightly off the bottom */
   border-top: 2px solid #4CAF50;
   border-bottom: 2px solid #4CAF50;
   background: #F3F3F3;
+  align-items: center;
 }
 
 .input-form input {
@@ -154,6 +157,8 @@ body, html, #root {
   background-color: #FFFFFF;
   border: 1px solid #BDBDBD;
   color: #333333;
+  border-radius: 4px;
+  min-width: 200px
 }
 
 .input-form button {
@@ -163,10 +168,25 @@ body, html, #root {
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .input-form button:hover {
   background-color: #388E3C;
+}
+
+.image-label {
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+  color: #333;
+}
+
+.image-upload {
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  padding: 0.3rem;
+  border-radius: 4px;
+  background-color: #fff;
 }
 
 /* Typing Animation */
@@ -207,6 +227,15 @@ body, html, #root {
     border-top: 1px solid #BDBDBD;
   }
 
+  .input-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-form input[type="text"],
+  .input-form .image-upload,
+  .input-form button {
+    width: 100%;
 
   .news-feed {
     height: 400px;

@@ -10,19 +10,39 @@ function ChatPage() {
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [animatedResponse, setAnimatedResponse] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+
 
   const handleSampleClick = (q) => setUserInput(q);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!userInput.trim()) return;
+    if (!userInput.trim() && !imageFile) return;
 
-    setMessages([...messages, { role: "user", content: userInput }]);
+    // Show the user message or note that an image was sent
+    setMessages([...messages, {
+      role: "user",
+      content: userInput || "[Image uploaded]",
+    }]);
+
     setLoading(true);
 
     try {
-      const res = await axios.post("https://greenai-k36d.onrender.com/diagnose", { user_input: userInput });
-      let full = res.data.response;
+      let res;
+
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append("file", imageFile);
+        res = await axios.post("https://greenai-k36d.onrender.com/diagnose-image", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      } else {
+        res = await axios.post("https://greenai-k36d.onrender.com/diagnose", {
+          user_input: userInput,
+        });
+      }
+
+      const full = res.data.response;
       let index = 0;
       setAnimatedResponse("");
 
@@ -37,13 +57,18 @@ function ChatPage() {
         }
       };
       animate();
-    } catch {
-      setMessages([...messages, { role: "assistant", content: "Error fetching diagnosis." }]);
+    } catch (err) {
+      setMessages([...messages, {
+        role: "assistant",
+        content: "Error fetching diagnosis.",
+      }]);
     }
 
     setUserInput("");
+    setImageFile(null);
     setLoading(false);
   };
+
 
   return (
     <div className="three-column-layout">
@@ -76,8 +101,21 @@ function ChatPage() {
         <button className="scroll-to-latest" onClick={() => document.querySelector(".messages").scrollTop = document.querySelector(".messages").scrollHeight}>⬇️ Newest</button>
 
         <form onSubmit={handleSubmit} className="input-form">
-          <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="Describe your turf issue..." />
-          <button type="submit">Send</button>
+          <div className="input-group">
+            <label htmlFor="image-upload" className="image-label">📎 Attach Image:</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files[0])}
+              style={{ marginRight: "0.5rem" }}
+            />
+            <input
+              type="text"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              placeholder="Describe your turf issue..."
+            />
+            <button type="submit">Submit</button>
         </form>
       </main>
     </div>
