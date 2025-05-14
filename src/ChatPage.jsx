@@ -109,17 +109,18 @@ function ChatPage() {
               onChange={(e) => setImageFile(e.target.files[0])}
               style={{ marginRight: "0.5rem" }}
             />
+          </div>
             <input
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
               placeholder="Describe your turf issue..."
             />
-            <button type="submit">Submit</button>
+
+            <button type="submit">Send</button>
         </form>
       </main>
     </div>
   );
 }
-
 export default ChatPage;
