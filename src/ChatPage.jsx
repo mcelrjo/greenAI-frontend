@@ -33,11 +33,11 @@ function ChatPage() {
       if (imageFile) {
         const formData = new FormData();
         formData.append("file", imageFile);
-        res = await axios.post("https://greenai-k36d.onrender.com/diagnose-image", formData, {
+        res = await axios.post("https://greenai-0job.onrender.com/diagnose-image", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       } else {
-        res = await axios.post("https://greenai-k36d.onrender.com/diagnose", {
+        res = await axios.post("https://greenai-0job.onrender.com/diagnose", {
           user_input: userInput,
         });
       }
